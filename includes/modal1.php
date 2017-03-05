@@ -1,10 +1,9 @@
-﻿
+﻿<!-- Modal is a bootstrap popup on the webpage -->
 <div class="modal fade" id="adminLogin" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header"
-				style="background-color: #467347; border-color: #467347;">
+	<div class="modal-dialog" role="document"><!-- All information in the popup is shown as a document -->
+		<div class="modal-content"><!-- Contains all the modal content header/body/footer-->
+			<div class="modal-header" style="background-color: #467347; border-color: #467347;">
 				<button type="button" class="close" data-dismiss="modal"
 					style="color: white;">×</button>
 				<h4 class="modal-title" style="color: white;">Login to User Account</h4>
@@ -21,8 +20,6 @@
 					<div id="home" class="tab-pane fade in active">
 						
 						<p>
-						
-						
 						<form id="frm1">
 							<div class="form-group">
 								<label for="recipient-name" class="form-control-label">UserName:</label>
@@ -78,13 +75,12 @@
 		<div class="modal-content">
 			<div class="modal-header"
 				style="background-color: #467347; border-color: #467347;">
-				<button type="button" class="close" data-dismiss="modal"
-					style="color: white;">×</button>
+				<button type="button" class="close" data-dismiss="modal" style="color: white;">×</button><!-- Cross button on right of header to close the pop up -->
 				<h4 class="modal-title" style="color: white;">Tell us about yourself</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body"><!-- Contents of the popup  -->
 				<form>
-					<table class="table table-bordered">
+					<table class="table table-bordered"><!-- To show a  table with border -->
 						<tbody>
 							<tr>
 								<td><label>First Name(optional):</label></td>
@@ -109,14 +105,14 @@
 
 							<tr>
 								<td><label>Rank:<font style="color: red;">*</font></label></td>
-								<td><select id="rank" class="form-control">
-										<option>Loading</option>
-										
-								</select></td>
+								<td>
+								<select id="rank" class="form-control">	</select>
+								<!-- All the information under the drop down is coming through java script and php -->
+								</td>
 								<td><label>Station:<font style="color: red;">*</font></label></td>
-								<td><select id="station" class="form-control">
-										<option>Loading</option>
-								</select></td>
+								<td><select id="station" class="form-control"></select>
+								<!-- All the information under the drop down is coming through java script and php -->
+								</td>
 							</tr>
 
 							<tr>

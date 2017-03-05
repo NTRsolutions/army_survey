@@ -6,15 +6,19 @@ if (isset ( $_POST ["login"] [0] ) && isset ( $_POST ["login"] [1] ) && isset ( 
 	$password = $_POST ["login"] [1];
 	if ($_POST ["login"] [3] == "login") {
 		try {
+			//Kedia the data is sent as kedia but the ahacker can hack and see the data as kedia jaidep or 1 =1
 			$pass_log = md5 ( $password );
+			//$sql_log = "select count(*) from admin_login_table where user_name = '$username' and password_login = '$pass_log'";
+			// if i dont use bind paramamter and enter the username as jaideep or 1=1 the website will get hacked to prevent it i am using bind param
+			//the bind param will convert jaideep or 1=1 into a string and the result will be false
 			$sql_login = "SELECT COUNT(*) FROM 	admin_login_table WHERE user_name = :user_name AND password_login = :password_login";
 			$quer_login = $bdd->prepare ( $sql_login );
-			$quer_login->bindParam ( ":user_name", $username );
+			$quer_login->bindParam ( ":user_name", $username );//preventing sql injection
 			$quer_login->bindParam ( ":password_login", $pass_log );
 			$quer_login->execute ();
 			$res_login = $quer_login->fetchColumn ();
-			if ($res_login > 0) {
-				$_SESSION ["username"] = $username;
+			if ($res_login == 1) {
+				$_SESSION ["username"] = $username;//creating a session variable
 				echo true;
 			} else {
 				echo 'Login credentials are wrong or donot exist!';
@@ -26,14 +30,15 @@ if (isset ( $_POST ["login"] [0] ) && isset ( $_POST ["login"] [1] ) && isset ( 
 	if ($_POST ["login"] [3] == "register") {
 		try {
 			$type = 'admin';
-			$pass_save = md5 ( $password );
+			$pass_save = md5 ( $password );//hash function
+			//mysqli_real_escape_string($link, $string_to_escape)
 			$sql_reg = "INSERT INTO `admin_login_table` (`user_name`, `password_login`, `type_login`) VALUES (:user_name,:password_login,:type_login);";
 			$quer_reg = $bdd->prepare ( $sql_reg );
 			$quer_reg->bindParam ( ":user_name", $username );
 			$quer_reg->bindParam ( ":password_login", $pass_save );
 			$quer_reg->bindParam ( ":type_login", $type );
 			$quer_reg->execute ();
-			$res_reg = $quer_reg->rowCount ();
+			$res_reg = $quer_reg->rowCount ();//checks whether a row was inserted or not
 			if ($res_reg > 0) {
 				echo "Ok";
 			} else {

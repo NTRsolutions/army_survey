@@ -20,8 +20,8 @@ $('#survey_form').on('show.bs.modal', function (event) {
 	});
 
 function login(a,b,c,d){
-	if(a == ""){alert("enter username");}
-	if(b == ""){alert("enter password");}
+	if(a == "" || b == ""){alert("enter username");}
+	
 	else{
 	var uname = a;
 	var psw = b;
@@ -37,8 +37,8 @@ function login(a,b,c,d){
 		beforeSend:function(msg){},
 		afterSend:function(msg){},
 		success:function(msg){
-
-			if(msg){ window.location.replace("admin/admin.php");}
+			
+			if(msg==1){ window.location.replace("admin/admin.php");}
 			
 		else {
 			alert(msg);
@@ -53,25 +53,25 @@ function register(a,b,c,d){
 	if(a == ""){alert("enter username");}
 	if(b == ""){alert("enter password");}
 	else{
-	var uname = a;
-	var psw = b;
-	login = [];
-	login[0] = uname;
-	login[1] = psw;
+	var uname = a;//stroes username
+	var psw = b;//stores the password
+	login = [];//create empty array
+	login[0] = uname;//store username
+	login[1] = psw;//store password
 	login[2] = c;
-	login[3] = "register";
+	login[3] = "register";//tell php to register
+	//ajax start
 	$.ajax({
 		url: "admin/ajax_140724022017.php",
 		method: "post",
 		data: {login:login},
-		beforeSend:function(msg){},
-		afterSend:function(msg){},
+		
 		success:function(msg){
 			if(msg == "Ok"){ window.location.replace("index.php");}
 			
 		else {
 			alert(msg);
-			$("#frm"+d)[0].reset();
+			
 			window.location.replace("index.php");
 		}
 		}
@@ -191,6 +191,15 @@ $("#save_creds").click(function(){
 	if(age == "" || rank == "" || station == "" || m_stat == "" || noc == "" || nocs == "" || tenure == ""){
 		alert("Please enter the mandetory details!");
 	}
+	else if(nocs > noc){
+		alert("Children in school cannot be greater than number of children");
+	}
+	else if(age <= 0){
+		alert("Wrong age input!!");
+	}
+	else if(tenure <=0 ){
+		alert("Wrong Tenure.");
+	}
 	else{
 	cread_data_save = [];
 	cread_data_save[0] = fname;
@@ -212,7 +221,7 @@ $("#save_creds").click(function(){
 		beforeSend:function(msg){},
 		afterSend:function(msg){},
 		success:function(msg){
-			if(msg){ window.location.replace("take_survey.php");}
+			if(msg==1){ window.location.replace("take_survey.php");}
 			
 		else {
 			alert(msg);

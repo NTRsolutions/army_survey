@@ -4,7 +4,7 @@ ini_set("session.use_trans_sid", "0");
 ini_set("session.use_only_cookies", "1");
 session_start ();
 
-if (! isset ( $_SESSION ["username"] ) && !empty($_SESSION ["username"])) {
+if (! isset ( $_SESSION ["username"] ) && empty($_SESSION ["username"])) {
 	header ( "Location: ../index.php" );
 }
 if (! isset ( $_GET ["page"] )) {
@@ -73,7 +73,7 @@ body {
 					</li>
 				</ul>
 				 <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-in" ></span> logout</a></li>
+      <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-in" ></span> logout<?php echo $_SESSION["username"]?></a></li>
     </ul>
 			</div>
 			<!-- /.navbar-collapse -->
