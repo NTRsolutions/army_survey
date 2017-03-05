@@ -4,6 +4,10 @@ include_once 'admin/bdd.php';
 if (! isset ( $qno )) {
 	$qno = 0;
 }
+if(isset($_POST["first_greetings"]) && !empty($_POST["first_greetings"]) && $_POST["first_greetings"] == 'yes'){
+	
+	$_SESSION["first_greetings"] = "yes";
+}
 if ((isset ( $_SESSION ["USERNAME"] ) && ! empty ( $_SESSION ["USERNAME"] )) && isset ( $_SESSION ["SURVEY_ID"] ) && ! empty ( $_SESSION ["SURVEY_ID"] )) {
 	/*
 	 * echo "Hello -".$_SESSION["USERNAME"];
@@ -118,9 +122,28 @@ body {
 				<hr>
 				<div class="row">
 					<div class="col-sm-12">
+					<?php 
+					if( !isset($_POST["first_greetings"]) && empty($_POST["first_greetings"]) && !isset($_SESSION['first_greetings'])){
+						echo '<p>
+							<h3 style="color: green;">Please read the following instructions before you begin:-</h3>
+							<ul>
+							<li>Please read questions properly before answering.</li>
+							<li>For every question  weightage score will signify the relevence of the question to the visitor. </li>
+							<li>Wightage of every question ranges from 1 to 10.</li>
+							<li>Marks of every question will range from 1 to 100.</li>
+							</ul>
+							<hr>
+							<form action="" method="POST">
+							<input type="hidden" name="first_greetings" value="yes">
+							<input type="submit" class="btn btn-siccess" value="Start Survey">
+							</form>
+								</p>';
+						
+					}
+					?>
 					<?php
 					
-if (isset ( $qno )) {
+						if (isset ( $qno ) && isset($_SESSION['first_greetings'])) {
 						$count_sql = "select count(*) from QUESTION_TABLE";
 						$quer_count = $bdd->prepare ( $count_sql );
 						$quer_count->execute ();
@@ -167,6 +190,7 @@ if (isset ( $qno )) {
 						}
 						else {
 							echo "<h2>Thank You for Participating in the Survey!!!</h2><br><a href=\"index.php\" class=\"btn btn-success\">Back to Home Page</a>";
+							unset($_SESSION['first_greetings']);
 						}
 					}
 					
