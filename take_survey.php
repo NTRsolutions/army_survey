@@ -166,8 +166,7 @@ body {
 							
 							?>
 					<h1><?php echo  (isset($question))?"Q ".($qno+1).":".$question:"";?></h1>
-							<input type="hidden" name="userid"
-								value="<?php echo $_SESSION["USERNAME"]; ?>" /> <input
+							<input type="hidden" name="userid"	value="<?php echo $_SESSION["USERNAME"]; ?>" /> <input
 								type="hidden" name="stationid"
 								value="<?php echo $_SESSION["STATION_ID"]; ?>" /> <input
 								type="hidden" name="surveyid"
@@ -207,8 +206,6 @@ body {
 
 	</div>
 	<!-- /.container -->
-
-
 
 	<script src="js/loc.js">	</script>
 </body>

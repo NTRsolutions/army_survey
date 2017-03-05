@@ -59,7 +59,7 @@ body {
 				<ul class="nav navbar-nav">
 					<li><a href="index.php">Take Survey</a></li>
 					<li><a href="find_loc.php">Find a Location</a></li>
-					<li><a href="admin/admin.php" data-toggle="modal" data-target="#adminLogin">Admin</a>
+					<li><a href="#" data-toggle="modal" data-target="#adminLogin">Admin</a>
 					</li>
 				</ul>
 			</div>
@@ -119,7 +119,10 @@ body {
 
 
 
+
+<?php include_once 'includes/modal1.php';?>
 	<script src="js/loc.js">	</script>
+	<script src="js/main.js">	</script>
 </body>
 <!-- Modal for login -->
 
